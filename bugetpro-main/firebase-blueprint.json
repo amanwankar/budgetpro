@@ -1,0 +1,160 @@
+{
+  "entities": {
+    "Transaction": {
+      "title": "Transaction",
+      "description": "A financial transaction (income or expense)",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "The name of the transaction" },
+        "amount": { "type": "number", "description": "The amount of the transaction" },
+        "category": { "type": "string", "description": "The category of the transaction" },
+        "method": { "type": "string", "description": "The payment method used" },
+        "date": { "type": "string", "description": "The date of the transaction" },
+        "status": { "type": "string", "description": "The status of the transaction" },
+        "uid": { "type": "string", "description": "The user ID of the owner" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "The creation timestamp" }
+      },
+      "required": ["name", "amount", "category", "method", "date", "status", "uid", "createdAt"]
+    },
+    "Goal": {
+      "title": "Goal",
+      "description": "A financial saving goal",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "The name of the goal" },
+        "target": { "type": "number", "description": "The target amount" },
+        "current": { "type": "number", "description": "The current amount saved" },
+        "deadline": { "type": "string", "description": "The deadline for the goal" },
+        "uid": { "type": "string", "description": "The user ID of the owner" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "The creation timestamp" }
+      },
+      "required": ["name", "target", "current", "deadline", "uid", "createdAt"]
+    },
+    "Budget": {
+      "title": "Budget",
+      "description": "A monthly budget for a specific category",
+      "type": "object",
+      "properties": {
+        "category": { "type": "string", "description": "The category of the budget" },
+        "limit": { "type": "number", "description": "The monthly spending limit" },
+        "month": { "type": "string", "description": "The month for this budget (e.g., 'Mar 2026')" },
+        "uid": { "type": "string", "description": "The user ID of the owner" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "The creation timestamp" }
+      },
+      "required": ["category", "limit", "month", "uid", "createdAt"]
+    },
+    "Investment": {
+      "title": "Investment",
+      "description": "FD, EMI, SIP, or RD investments",
+      "type": "object",
+      "properties": {
+        "type": { "type": "string", "enum": ["FD", "EMI", "SIP", "RD"], "description": "Type of investment" },
+        "name": { "type": "string", "description": "Name of the investment/bank" },
+        "amount": { "type": "number", "description": "Invested amount" },
+        "dueDate": { "type": "string", "format": "date", "description": "Maturity or next EMI date" },
+        "imageUrl": { "type": "string", "description": "URL of the uploaded document image" },
+        "interestRate": { "type": "number", "description": "Annual interest rate" },
+        "uid": { "type": "string", "description": "User ID of the owner" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" }
+      },
+      "required": ["type", "name", "amount", "dueDate", "uid", "createdAt"]
+    },
+    "UserStats": {
+      "title": "UserStats",
+      "description": "Manual overrides for user financial stats",
+      "type": "object",
+      "properties": {
+        "manualBalance": { "type": "number", "description": "Manual balance override" },
+        "manualIncome": { "type": "number", "description": "Manual income override" },
+        "manualExpense": { "type": "number", "description": "Manual expense override" },
+        "manualSavings": { "type": "number", "description": "Manual savings override" },
+        "savingStreak": { "type": "number", "description": "Current saving streak in days" },
+        "lastDepositDate": { "type": "string", "format": "date-time", "description": "Last deposit date for streak tracking" },
+        "uid": { "type": "string", "description": "The user ID of the owner" }
+      },
+      "required": ["uid"]
+    },
+    "GullakPot": {
+      "title": "GullakPot",
+      "description": "A savings pot (Gullak)",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "emoji": { "type": "string" },
+        "target": { "type": "number" },
+        "current": { "type": "number" },
+        "lockDate": { "type": "string" },
+        "color": { "type": "string" },
+        "contributors": { "type": "array", "items": { "type": "object" } },
+        "uid": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "target", "current", "uid", "createdAt"]
+    },
+    "GullakDeposit": {
+      "title": "GullakDeposit",
+      "description": "A deposit into a Gullak pot",
+      "type": "object",
+      "properties": {
+        "potId": { "type": "string" },
+        "amount": { "type": "number" },
+        "date": { "type": "string" },
+        "method": { "type": "string", "enum": ["manual", "auto"] },
+        "note": { "type": "string" },
+        "uid": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["potId", "amount", "date", "method", "uid", "createdAt"]
+    },
+    "RoundUpHistory": {
+      "title": "RoundUpHistory",
+      "description": "History of auto round-up savings",
+      "type": "object",
+      "properties": {
+        "date": { "type": "string" },
+        "originalAmount": { "type": "number" },
+        "roundedAmount": { "type": "number" },
+        "savedAmount": { "type": "number" },
+        "potId": { "type": "string" },
+        "potName": { "type": "string" },
+        "uid": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["date", "originalAmount", "roundedAmount", "savedAmount", "potId", "potName", "uid", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "Collection of financial transactions"
+    },
+    "/goals/{goalId}": {
+      "schema": "Goal",
+      "description": "Collection of saving goals"
+    },
+    "/budgets/{budgetId}": {
+      "schema": "Budget",
+      "description": "Collection of monthly budgets"
+    },
+    "/investments/{investmentId}": {
+      "schema": "Investment",
+      "description": "Collection of FD and EMI investments"
+    },
+    "/userStats/{userId}": {
+      "schema": "UserStats",
+      "description": "User specific financial stats overrides"
+    },
+    "/gullakPots/{potId}": {
+      "schema": "GullakPot",
+      "description": "Collection of savings pots"
+    },
+    "/gullakDeposits/{depositId}": {
+      "schema": "GullakDeposit",
+      "description": "Collection of deposits into pots"
+    },
+    "/roundUpHistory/{historyId}": {
+      "schema": "RoundUpHistory",
+      "description": "Collection of round-up history"
+    }
+  }
+}

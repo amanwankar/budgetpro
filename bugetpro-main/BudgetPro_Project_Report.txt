@@ -1,0 +1,109 @@
+================================================================================
+                                BUDGETPRO - PROJECT REPORT
+================================================================================
+
+1. PROJECT OVERVIEW
+-------------------
+BudgetPro is a premium personal finance management application designed to help 
+users track their wealth, manage daily transactions, and achieve financial goals 
+through innovative features like AI-powered receipt scanning and automated 
+savings pots ("Gullak").
+
+The application offers a modern, high-performance UI with support for both Light 
+and Dark modes, real-time data synchronization, and detailed financial analytics.
+
+2. TECHNOLOGY STACK
+-------------------
+• Frontend:
+  - React 19: Core UI framework.
+  - Vite: Fast dev server and build tool.
+  - Tailwind CSS (v4): Modern styling and layout.
+  - Framer Motion: Fluid animations and transitions.
+  - Lucide React: Icon system.
+  - Recharts: Interactive financial data visualization.
+
+• Backend:
+  - Node.js & Express: Custom server for handling payments and AI processing.
+  - TSX: TypeScript execution engine for backend logic.
+
+• Database & Authentication:
+  - Firebase Auth: Secure user login and guest authentication.
+  - Cloud Firestore: Real-time NoSQL database for transactions, goals, and pots.
+
+• Integrations & AI:
+  - Google Gemini (@google/genai): AI engine for financial insights.
+  - Google Cloud Vision: OCR engine for receipt scanning.
+  - Razorpay: Payment gateway for UPI and card processing.
+
+3. CORE FEATURES & MODULES
+--------------------------
+• Dashboard:
+  - 360° view of financial health (Balance, Income, Expense, Savings).
+  - Monthly spending trends and category breakdown.
+  - Recent activity feed.
+
+• Transaction Management:
+  - Manual entry with category tagging (Food, Shopping, Rent, etc.).
+  - Real-time sync with database.
+  - Detailed transaction history with search and filtering.
+
+• Budgets:
+  - Set monthly spending limits per category.
+  - Visual progress bars with threshold alerts (e.g., warning at 80% usage).
+  - Automated notifications for budget breaches.
+
+• Investments Tracker:
+  - Track Fixed Deposits (FD), Recurring Deposits (RD), SIPs, and EMIs.
+  - Interest rate tracking and maturity/due date alerts.
+  - Portfolio performance visualization.
+
+• Gullak (Savings Pots):
+  - Goal-based saving containers with unique emojis and names.
+  - Lock-in periods to prevent impulsive withdrawals.
+  - Collaborative saving options with multiple contributors.
+
+• Statistics & Analysis:
+  - Comprehensive charts comparing monthly income vs. expense.
+  - Pie charts showing category-wise spending distribution.
+
+4. INNOVATIVE MECHANISMS
+------------------------
+• AI Receipt Scanner:
+  Automates data entry by allowing users to upload photos of receipts. The 
+  backend uses Google Cloud Vision OCR to extract the vendor name, date, and 
+  total amount, then automatically creates a transaction.
+
+• Auto Round-Up Engine:
+  BudgetPro encourages passive saving by rounding up every expense to the 
+  nearest ₹10/₹50/₹100 and automatically depositing the "spare change" into 
+   a designated Gullak pot.
+
+• Financial Streak:
+  Gamifies saving behavior by tracking consecutive days of positive net flow.
+
+5. ARCHITECTURE & STATE MANAGEMENT
+---------------------------------
+• State Management:
+  The application uses a robust `FinanceContext` (React Context API) to manage 
+  global state. This handles authentication states, real-time Firestore 
+  listeners, and standard actions like adding/deleting transactions.
+
+• Real-time Sync:
+  Uses Firebase `onSnapshot` to ensure that data is updated across devices 
+  instantly without manual refreshes.
+
+• Backend Servers:
+  - `server.ts`: Handles Razorpay order creation and payment verification.
+  - `receipt-scanner-server.js`: Handles multipart file uploads and 
+    Cloud Vision API coordination.
+
+6. SETUP & EXECUTION
+--------------------
+1. Run `npm install` to set up all frontend and backend dependencies.
+2. Configure `.env` with Firebase, Gemini, and Razorpay keys.
+3. Use `npm run dev` to start the integrated server.
+4. Access the premium dashboard at http://localhost:3000.
+
+================================================================================
+                               END OF REPORT
+================================================================================

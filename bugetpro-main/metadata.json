@@ -1,0 +1,5 @@
+{
+  "name": "BudgetPro - Expense Tracker",
+  "description": "A comprehensive personal finance dashboard for tracking expenses, income, savings, and goals.",
+  "requestFramePermissions": ["camera"]
+}
