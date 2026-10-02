@@ -13,12 +13,21 @@ async function startServer() {
 
   app.use(express.json());
 
+  app.get("/api/health", (req, res) => {
+  res.status(200).json({
+    status: "healthy",
+    service: "BudgetPro",
+    timestamp: new Date().toISOString(),
+  });
+});
+
   // Razorpay Initialization
   const razorpay = new Razorpay({
     key_id: process.env.RAZORPAY_KEY_ID || "rzp_test_dummy_id",
     key_secret: process.env.RAZORPAY_KEY_SECRET || "rzp_test_dummy_secret",
   });
-
+  
+  
   // API: Create Order
   app.post("/api/payment/create-order", async (req, res) => {
     try {
