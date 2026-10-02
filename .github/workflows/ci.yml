@@ -44,7 +44,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t amanwankar/budgetpro:${{ github.sha }} ./bugetpro-main
+        run: docker build -t amanwankar18/budgetpro:${{ github.sha }} ./bugetpro-main
 
       - name: Push Docker image
-        run: docker push amanwankar/budgetpro:${{ github.sha }}
+        run: docker push amanwankar18/budgetpro:${{ github.sha }}
