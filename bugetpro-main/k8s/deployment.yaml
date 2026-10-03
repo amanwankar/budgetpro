@@ -1,8 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
+
 metadata:
   name: budgetpro
   namespace: budgetpro
+
 spec:
   replicas: 2
 
@@ -29,6 +31,10 @@ spec:
           env:
             - name: NODE_ENV
               value: "production"
+
+          envFrom:
+            - secretRef:
+                name: budgetpro-secrets
 
           readinessProbe:
             httpGet:
