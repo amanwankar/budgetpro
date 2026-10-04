@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: budgetpro
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  namespaceSelector:
+    matchNames:
+      - budgetpro
+  selector:
+    matchLabels:
+      app: budgetpro
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
